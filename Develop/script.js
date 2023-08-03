@@ -22,7 +22,7 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   function updateHourClasses() {
-    var currentHour = dayjs().format("H");
+    var currentHour = dayjs().hour();
 
     $(".time-block").each(function () {
       var blockHour = parseInt($(this).attr("id").split("-")[1]);
