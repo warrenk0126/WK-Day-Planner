@@ -3,8 +3,9 @@
 // in the html.
 $(function () {
   updateHourClasses();
-  loadSavedDescriptions();
+  loadsavedDesc();
   displayCurrentDate();
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -12,10 +13,14 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   $(".saveBtn").on("click", function() {
+    // $(this) is the save button being clicked
+    // .siblings() method returns all elements that share the same parent, the save button 
     var description = $(this).siblings(".description").val();
+    // attr("id") returns value of id, so "hour-9, 10, etc."
     var hourId = $(this).parent().attr("id");
     localStorage.setItem(hourId, description);
   });
+
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
@@ -25,6 +30,7 @@ $(function () {
     var currentHour = dayjs().hour();
 
     $(".time-block").each(function () {
+      // $(this).attr("id") retrives time block element
       var blockHour = parseInt($(this).attr("id").split("-")[1]);
 
       if (blockHour < currentHour) {
@@ -36,18 +42,20 @@ $(function () {
       }
     });
   }
+
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  function loadSavedDescriptions() {
+  function loadsavedDesc() {
     $(".time-block").each(function () {
       var hourId = $(this).attr("id");
-      var savedDescription = localStorage.getItem(hourId);
-      if (savedDescription !== null) {
-        $(this).find(".description").val(savedDescription);
+      var savedDesc = localStorage.getItem(hourId);
+      if (savedDesc !== null) {
+        $(this).find(".description").val(savedDesc);
       }
     });
   }
+
   // TODO: Add code to display the current date in the header of the page.
   function displayCurrentDate() {
     var currentDate = dayjs().format("dddd, MMMM D, YYYY");
