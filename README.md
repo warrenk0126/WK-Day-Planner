@@ -1,4 +1,7 @@
 # WK-Day-Planner
+
+User can write comments into rows segmented into hours from 9AM to 5PM, typicaly office hours. Saved comments are persistent.
+
 All acceptance criteria have been met
 
 TODO comments have been left in place to identify which function corresponds to which criteria
